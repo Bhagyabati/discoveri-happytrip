@@ -30,6 +30,10 @@ pipeline {
         }
 		stage('Deploy') {
 			steps{
+			// Some Step
+			powershell label: '', script: 'mvn -f spring-boot-samples/spring-boot-sample-atmosphere/pom.xml clean package'
+      }
+			{
 				echo "Deploying"
 				deploy adapters: [tomcat7(credentialsId: '98e9cbd9-106c-4efa-8238-9888f9bc8fc3', path: '', url: 'http://localhost:8085')], contextPath: 'happytrip', war: '**/*.war'
 			}
